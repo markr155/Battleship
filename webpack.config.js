@@ -8,8 +8,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), 
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'), // Serve content from the public folder
-    publicPath: '/dist/', // Serve bundled files from the dist folder
-    port: 3000, // Choose the port for Webpack Dev Server
-  }
-};
+    watchFiles: ["src/*.html"],
+    hot: true,
+    port: 3000,
+    devMiddleware: {
+      publicPath: '/dist/', // Specify the public path for the bundled files in devMiddleware
+        },
+    }
+}
