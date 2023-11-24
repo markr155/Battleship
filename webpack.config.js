@@ -14,5 +14,15 @@ module.exports = {
     devMiddleware: {
       publicPath: '/dist/', // Specify the public path for the bundled files in devMiddleware
         },
-    }
+    },
+    module: {
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader"],
+          },
+        ],
+    },
+    
+
 }
