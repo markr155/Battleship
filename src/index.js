@@ -1,3 +1,2 @@
-import css from '../styles/style.css'
+import css from "../styles/style.css";
 console.clear();
-

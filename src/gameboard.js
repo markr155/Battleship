@@ -1,5 +1,5 @@
 function gameBoard() {
-    return true
-};
+  return true;
+}
 
 module.exports = gameBoard;

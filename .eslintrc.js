@@ -8,15 +8,19 @@ module.exports = {
     {
       env: {
         node: true,
+        jest: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: [".eslintrc.{js,cjs}", "**/*.test.js", "**/*.config.js"],
       parserOptions: {
-        sourceType: "script",
+        sourceType: "module",
       },
     },
   ],
   parserOptions: {
     ecmaVersion: "latest",
   },
-  rules: {},
+  rules: {
+    "no-unused-vars": "off",
+    "no-undef": "off",
+  },
 };
