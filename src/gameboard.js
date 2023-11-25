@@ -4,18 +4,19 @@ function gameBoard() {
   // board to be 10x10
   // 0, 0 bottom left, -> 9, 9 top right
   const board = [];
-  for (let x = 0; x < 9; x++) {
+  //build game board
+  for (let x = 0; x < 10; x++) {
     board[x] = [];
-    for (let y = 0; y < 9; y++) {
-      board[x][y] = { x, y };
+    for (let y = 0; y < 10; y++) {
+      board[x][y] = null;
     }
   }
 
-  placeShip = (length, coord, horizontal) => {
+  placeShip = (ship, coord, horizontal) => {
     // call ship factory to place ship at coordinates
     const x = coord[0];
     const y = coord[1];
-    const ship = newShip(length);
+    const length = ship.length;
 
     for (let i = 0; i < length; i++) {
       if (horizontal === true) {
@@ -44,13 +45,16 @@ function gameBoard() {
     if (coord[0] > 9 || coord[1] > 9) return "invalid attack coordinate";
   };
 
+  
+
   return {
     placeShip,
     receiveAttack,
   };
 }
+
 // receiveAttack(coord)
-// checks if coords are valid
+// checks if coords are 
 // checks if ship occupies square -> ship.hit()
 // checks if square has been hit before
 
