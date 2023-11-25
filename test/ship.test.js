@@ -1,21 +1,21 @@
-const ship = require("../src/ship");
+const newShip = require("../src/ship");
 
-const ship2 = ship(2);
-const ship4 = ship(4);
+const newShip2 = newShip(2);
+const newShip4 = newShip(4);
 
-test("Ship is sunk", () => {
-  ship2.hit();
-  ship2.hit();
-  expect(ship2.isSunk()).toBe(true);
+test("newShip is sunk", () => {
+  newShip2.hit();
+  newShip2.hit();
+  expect(newShip2.isSunk()).toBe(true);
 });
 
-test("Ship is not sunk", () => {
-  ship4.hit();
-  ship4.hit();
-  expect(ship4.isSunk()).toBe(false);
+test("newShip is not sunk", () => {
+  newShip4.hit();
+  newShip4.hit();
+  expect(newShip4.isSunk()).toBe(false);
 });
 
-// ship factory
+// newShip factory
 // length
 // times-hit
 // hit() -> increments times-hit

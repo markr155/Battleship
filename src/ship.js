@@ -1,4 +1,4 @@
-function ship(len) {
+function newShip(length) {
   // let length = len;
   let timesHit = 0;
 
@@ -7,7 +7,7 @@ function ship(len) {
   };
 
   isSunk = () => {
-    return timesHit === len ? true : false;
+    return timesHit === length ? true : false;
   };
   return {
     hit,
@@ -15,7 +15,7 @@ function ship(len) {
   };
 }
 
-// ship factory
+// newShip factory
 // length
 // times-hit
 // hit() -> increments times-hit
@@ -25,4 +25,4 @@ function ship(len) {
 // length 4, times-hit 3, hit() -> true
 // length 2, times-hit 0, hit() -> false
 
-module.exports = ship;
+module.exports = newShip;
