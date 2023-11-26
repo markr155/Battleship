@@ -1,5 +1,7 @@
 function newShip(length) {
-  if (length <= 0) { throw new Error('Length must be above 0')}
+  if (length <= 0) {
+    throw new Error("Length must be above 0");
+  }
   let timesHit = 0;
 
   hit = () => {

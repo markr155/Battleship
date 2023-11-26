@@ -1,8 +1,9 @@
 const gameBoard = require("../src/gameboard");
 const board = gameBoard();
 
+
 beforeAll(() => {
-  board.placeShip(4, [0, 0], true);
+  board.placeShip(4, [0, 0], true);  
   board.placeShip(3, [9, 9], true);
   board.placeShip(3, [9, 9], false);
 });

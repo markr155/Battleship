@@ -5,8 +5,9 @@ const newShip4 = newShip(4);
 
 test("ship length not 0", () => {
   expect(() => {
-    newShip(0)}).toThrow('Length must be above 0')
-})
+    newShip(0);
+  }).toThrow("Length must be above 0");
+});
 
 test("newShip is sunk", () => {
   newShip2.hit();

@@ -1,24 +1,18 @@
 newShip = require("./ship");
 
 function gameBoard() {
-  // board to be 10x10
-  // 0, 0 bottom left, -> 9, 9 top right
-  const board = [];
-  //build game board
-  for (let x = 0; x < 10; x++) {
-    board[x] = [];
-    for (let y = 0; y < 10; y++) {
-      board[x][y] = null;
-    }
-  }
+  // Set board length/width
+  const boardSize = 10;
+  // Create board
+  const board = Array.from({ length: boardSize }, () => Array(boardSize).fill(null));
 
   placeShip = (ship, coord, horizontal) => {
     // call ship factory to place ship at coordinates
-    const x = coord[0];
-    const y = coord[1];
+    const [x, y] = coord
     const length = ship.length;
 
     for (let i = 0; i < length; i++) {
+      // places the ship left to right unless exceeds board size
       if (horizontal === true) {
         // x + length if horizontal - if x + length > 9, 9 - length
         if (x + length < 9) {
@@ -45,8 +39,6 @@ function gameBoard() {
     if (coord[0] > 9 || coord[1] > 9) return "invalid attack coordinate";
   };
 
-  
-
   return {
     placeShip,
     receiveAttack,
@@ -54,7 +46,7 @@ function gameBoard() {
 }
 
 // receiveAttack(coord)
-// checks if coords are 
+// checks if coords are
 // checks if ship occupies square -> ship.hit()
 // checks if square has been hit before
 
