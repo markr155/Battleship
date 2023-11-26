@@ -12,13 +12,13 @@ test("ship length not 0", () => {
 test("newShip is sunk", () => {
   newShip2.hit();
   newShip2.hit();
-  expect(newShip2.isSunk()).toBe(true);
+  expect(newShip2.isSunk()).toBeTrue;
 });
 
 test("newShip is not sunk", () => {
   newShip4.hit();
   newShip4.hit();
-  expect(newShip4.isSunk()).toBe(false);
+  expect(newShip4.isSunk()).toBeFalse;
 });
 
 // newShip factory
