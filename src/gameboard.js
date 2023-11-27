@@ -9,8 +9,10 @@ function gameBoard() {
   );
 
   // Initialise arrays to track attacks
+  // maybe change hits/miss to a tracker object
   const attacksMissed = [];
   const attacksHit = [];
+  const shipsPlaced = [];
 
   placeShip = (ship, coord, horizontal) => {
     // horizontal == orientation boolean
@@ -34,6 +36,7 @@ function gameBoard() {
         ? (board[startX + i][startY] = ship)
         : (board[startX][startY + i] = ship);
     }
+    shipsPlaced.push(ship);
   };
 
   receiveAttack = (coord) => {
@@ -42,6 +45,22 @@ function gameBoard() {
     if (x > boardSize - 1 || y > boardSize - 1 || x < 0 || y < 0)
       return "invalid attack coordinate";
     // Check if square has been attacked before
+    // refactor
+
+    let hasBeenAttacked = false;
+    attacksHit.forEach((attack) => {
+      if (attack[0] === x && attack[1] === y) {
+        hasBeenAttacked = true;
+      }
+    });
+
+    attacksMissed.forEach((attack) => {
+      if (attack[0] === x && attack[1] === y) {
+        hasBeenAttacked = true;
+      }
+    });
+
+    if (hasBeenAttacked) return "Square already attacked";
 
     tarSquare = board[x][y];
     if (tarSquare) {
@@ -54,6 +73,14 @@ function gameBoard() {
     }
   };
 
+  hasAllSunk = () => {
+    // if all ships in shipsPlaced have sunk return true
+    const shipsSunk = shipsPlaced.filter((ship) => ship.isSunk());
+    return (shipsSunk.length == shipsPlaced.length)
+    ? true
+    : false;
+  };
+
   return {
     placeShip,
     receiveAttack,
@@ -63,8 +90,10 @@ function gameBoard() {
     get getMisses() {
       return attacksMissed;
     },
+    hasAllSunk,
   };
 }
 // checks if square has been hit before
+
 
 module.exports = gameBoard;

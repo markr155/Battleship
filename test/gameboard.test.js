@@ -3,6 +3,7 @@ const newShip = require("../src/ship");
 const board = gameBoard();
 
 beforeAll(() => {
+  ship1 = newShip(1);
   ship4 = newShip(4);
   ship3 = newShip(3);
   board.placeShip(ship4, [0, 0], true);
@@ -36,12 +37,20 @@ test("Attack Hits", () => {
 });
 
 test("Square already attacked", () => {
-  expect(board.receiveAttack([0, 0])).toBe("Hit!");
+  board.receiveAttack([0, 0]);
   expect(board.receiveAttack([0, 0])).toBe("Square already attacked");
+  board.receiveAttack([5, 5]);
+  expect(board.receiveAttack([5, 5])).toBe("Square already attacked");
 });
 
-// receiveAttack(coord)
-// checks if ship occupies square -> ship.hit()
-// checks if square has been hit before
-
-// store hits and misses
+test('Check if all ships are sunk', () => {
+  expect(board.hasAllSunk()).toBe(false);
+  board.receiveAttack([0, 0])
+  board.receiveAttack([1, 0])
+  board.receiveAttack([2, 0])
+  board.receiveAttack([3, 0])
+  board.receiveAttack([9, 9])
+  board.receiveAttack([8, 9])
+  board.receiveAttack([7, 9])
+  expect(board.hasAllSunk()).toBe(true);
+})
