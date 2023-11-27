@@ -18,14 +18,4 @@ function newShip(length) {
   };
 }
 
-// newShip factory
-// length
-// times-hit
-// hit() -> increments times-hit
-// isSunk() -> returns bool if times-hit === length
-
-// test
-// length 4, times-hit 3, hit() -> true
-// length 2, times-hit 0, hit() -> false
-
 module.exports = newShip;
