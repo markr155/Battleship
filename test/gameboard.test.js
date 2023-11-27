@@ -43,14 +43,14 @@ test("Square already attacked", () => {
   expect(board.receiveAttack([5, 5])).toBe("Square already attacked");
 });
 
-test('Check if all ships are sunk', () => {
+test("Check if all ships are sunk", () => {
   expect(board.hasAllSunk()).toBe(false);
-  board.receiveAttack([0, 0])
-  board.receiveAttack([1, 0])
-  board.receiveAttack([2, 0])
-  board.receiveAttack([3, 0])
-  board.receiveAttack([9, 9])
-  board.receiveAttack([8, 9])
-  board.receiveAttack([7, 9])
+  board.receiveAttack([0, 0]);
+  board.receiveAttack([1, 0]);
+  board.receiveAttack([2, 0]);
+  board.receiveAttack([3, 0]);
+  board.receiveAttack([9, 9]);
+  board.receiveAttack([8, 9]);
+  board.receiveAttack([7, 9]);
   expect(board.hasAllSunk()).toBe(true);
-})
+});

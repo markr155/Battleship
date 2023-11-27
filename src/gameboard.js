@@ -76,9 +76,7 @@ function gameBoard() {
   hasAllSunk = () => {
     // if all ships in shipsPlaced have sunk return true
     const shipsSunk = shipsPlaced.filter((ship) => ship.isSunk());
-    return (shipsSunk.length == shipsPlaced.length)
-    ? true
-    : false;
+    return shipsSunk.length == shipsPlaced.length ? true : false;
   };
 
   return {
@@ -94,6 +92,5 @@ function gameBoard() {
   };
 }
 // checks if square has been hit before
-
 
 module.exports = gameBoard;
