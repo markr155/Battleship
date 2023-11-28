@@ -1,4 +1,4 @@
-import {jest} from '@jest/globals';
+import { jest } from "@jest/globals";
 import gameBoard from "../src/gameboard";
 import newShip from "../src/ship";
 const board = gameBoard();

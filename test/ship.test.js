@@ -1,5 +1,5 @@
-import {jest} from '@jest/globals';
-import newShip from '../src/ship'
+import { jest } from "@jest/globals";
+import newShip from "../src/ship";
 
 // const newShip = require("../src/ship");
 

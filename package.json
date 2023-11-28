@@ -7,7 +7,7 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch *.js a",
-    "format": "npx prettier --write . && npx eslint .",
+    "format": "npx prettier --write .",
     "build": "webpack",
     "start": "webpack serve --open"
   },
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.3",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@webpack-cli/generators": "^3.0.7",
     "css-loader": "^6.8.1",

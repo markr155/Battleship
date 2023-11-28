@@ -1,4 +1,4 @@
-import {jest} from '@jest/globals';
+import { jest } from "@jest/globals";
 import newPlayer from "../src/player";
 
 const player = newPlayer();
