@@ -1,4 +1,7 @@
-const newShip = require("../src/ship");
+import {jest} from '@jest/globals';
+import newShip from '../src/ship'
+
+// const newShip = require("../src/ship");
 
 const newShip2 = newShip(2);
 const newShip4 = newShip(4);

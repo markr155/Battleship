@@ -1,6 +1,4 @@
-newShip = require("./ship");
-
-function gameBoard() {
+export default function gameBoard() {
   // Set board length/width
   const boardSize = 10;
   // Create board
@@ -62,7 +60,7 @@ function gameBoard() {
 
     if (hasBeenAttacked) return "Square already attacked";
 
-    tarSquare = board[x][y];
+    const tarSquare = board[x][y];
     if (tarSquare) {
       tarSquare.hit();
       attacksHit.push([x, y]);
@@ -93,4 +91,4 @@ function gameBoard() {
 }
 // checks if square has been hit before
 
-module.exports = gameBoard;
+// module.exports = gameBoard;

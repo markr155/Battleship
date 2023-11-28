@@ -1,4 +1,4 @@
-function newShip(length) {
+export default function newShip(length) {
   if (length <= 0) {
     throw new Error("Length must be above 0");
   }
@@ -18,4 +18,4 @@ function newShip(length) {
   };
 }
 
-module.exports = newShip;
+// module.exports = newShip;

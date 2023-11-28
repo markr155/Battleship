@@ -1,4 +1,4 @@
-function newPlayer(initialName) {
+export default function newPlayer(initialName) {
   const name = initialName;
   const compAttacks = [];
   function computerAttackCoord() {
@@ -28,4 +28,4 @@ function newPlayer(initialName) {
   };
 }
 
-module.exports = newPlayer;
+// module.exports = newPlayer;

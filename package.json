@@ -2,10 +2,11 @@
   "name": "battleship",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "watch": "jest --watch *.js a",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch *.js a",
     "format": "npx prettier --write . && npx eslint .",
     "build": "webpack",
     "start": "webpack serve --open"
@@ -14,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@webpack-cli/generators": "^3.0.7",
     "css-loader": "^6.8.1",
     "eslint": "^8.54.0",

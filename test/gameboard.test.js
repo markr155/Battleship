@@ -1,11 +1,12 @@
-const gameBoard = require("../src/gameboard");
-const newShip = require("../src/ship");
+import {jest} from '@jest/globals';
+import gameBoard from "../src/gameboard";
+import newShip from "../src/ship";
 const board = gameBoard();
 
 beforeAll(() => {
-  ship1 = newShip(1);
-  ship4 = newShip(4);
-  ship3 = newShip(3);
+  const ship1 = newShip(1);
+  const ship4 = newShip(4);
+  const ship3 = newShip(3);
   board.placeShip(ship4, [0, 0], true);
   board.placeShip(ship3, [9, 9], true);
 });
@@ -17,6 +18,8 @@ test("ship placed correctly", () => {
 });
 
 test("Check if another ship is occupying placement", () => {
+  const ship4 = newShip(4);
+  const ship3 = newShip(3);
   expect(board.placeShip(ship4, [0, 0], true)).toBe("Ship already placed");
   expect(board.placeShip(ship3, [9, 9], true)).toBe("Ship already placed");
 });

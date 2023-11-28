@@ -193,6 +193,7 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  transform: {},
 };
 
-module.exports = config;
+export default config;
