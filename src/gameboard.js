@@ -12,7 +12,7 @@ export default function gameBoard() {
   const attacksHit = [];
   const shipsPlaced = [];
 
-  placeShip = (ship, coord, horizontal) => {
+  const placeShip = (ship, coord, horizontal) => {
     // horizontal == orientation boolean
     const [x, y] = coord;
     const length = ship.length;
@@ -37,7 +37,7 @@ export default function gameBoard() {
     shipsPlaced.push(ship);
   };
 
-  receiveAttack = (coord) => {
+  const receiveAttack = (coord) => {
     // Check attack is on the board
     const [x, y] = coord;
     if (x > boardSize - 1 || y > boardSize - 1 || x < 0 || y < 0)
@@ -71,7 +71,7 @@ export default function gameBoard() {
     }
   };
 
-  hasAllSunk = () => {
+  const hasAllSunk = () => {
     // if all ships in shipsPlaced have sunk return true
     const shipsSunk = shipsPlaced.filter((ship) => ship.isSunk());
     return shipsSunk.length == shipsPlaced.length ? true : false;

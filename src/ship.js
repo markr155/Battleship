@@ -4,11 +4,11 @@ export default function newShip(length) {
   }
   let timesHit = 0;
 
-  hit = () => {
+  const hit = () => {
     timesHit++;
   };
 
-  isSunk = () => {
+  const isSunk = () => {
     return timesHit === length ? true : false;
   };
   return {

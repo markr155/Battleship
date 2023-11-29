@@ -21,7 +21,7 @@ export default function newPlayer(initialName) {
   return {
     issueAttack(board, coord) {
       if (name === "Computer") {
-        coord = computerAttackCoord(compAttacks);
+        coord = computerAttackCoord();
       }
       board.receiveAttack(coord);
     },
