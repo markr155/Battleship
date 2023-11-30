@@ -3,11 +3,9 @@ import gameBoard from "../src/gameboard.js";
 import newShip from "../src/ship.js";
 // Set up game loop
 
-export default function gameController() {
+export default function gameController(board1, board2) {
   const player1 = newPlayer("Human");
-  const player1Board = gameBoard();
   const player2 = newPlayer("Computer");
-  const player2Board = gameBoard();
 
   const testShips = [
     {
@@ -38,14 +36,14 @@ export default function gameController() {
   ];
 
   testShips.forEach((ship) => {
-    player1Board.placeShip(ship.ship, ship.coord, ship.horizontal);
+    board1.placeShip(ship.ship, ship.coord, ship.horizontal);
   });
   testShips.forEach((ship) => {
-    player2Board.placeShip(ship.ship, ship.coord, ship.horizontal);
+    board2.placeShip(ship.ship, ship.coord, ship.horizontal);
   });
 
   let currentPlayer = player1;
-  let enemyBoard = player2Board;
+  let enemyBoard = board2;
   let gameFinish = false;
 
   function switchCurrentPlayer() {
@@ -53,9 +51,9 @@ export default function gameController() {
       ? (currentPlayer = player2)
       : (currentPlayer = player1);
 
-    enemyBoard === player2Board
-      ? (enemyBoard = player1Board)
-      : (enemyBoard = player2Board);
+    enemyBoard === board2
+      ? (enemyBoard = board1)
+      : (enemyBoard = board2);
   }
 
   const playRound = (coord) => {

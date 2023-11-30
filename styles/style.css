@@ -1,3 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 body {
   background: darkgrey;
+}
+
+div {
+  /* border: 1px black solid; */
+
+}
+
+.player1-board, .player2-board {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  
+}
+
+header {
+  text-align: center;
 }
