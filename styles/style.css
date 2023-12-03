@@ -1,23 +1,41 @@
+:root {
+  --main-text: #ddd;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--main-text);
 }
 body {
-  background: darkgrey;
+  background: #000;
 }
 
 div {
   /* border: 1px black solid; */
+}
 
+.board-container {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .player1-board, .player2-board {
-  width: 80%;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  
+  padding-top: 10px;
+}
+
+.game-square {
+  aspect-ratio: 1;
+  background-color: #ddd;
+  border: 1px solid black;
+  max-width: 40px;
+}
+
+.game-square:hover {
+  background-color: #ddddddda
 }
 
 header {

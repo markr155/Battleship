@@ -14,5 +14,5 @@ console.log(playerBoard.getBoard)
 const player1Board = document.querySelector('.player1-board');
 const player2Board = document.querySelector('.player2-board');
 
-render.initialiseBoard(player1Board, playerBoard)
-
+render.renderBoard(player1Board, playerBoard);
+render.renderBoard(player2Board, comBoard);

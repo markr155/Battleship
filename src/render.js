@@ -2,7 +2,7 @@
   // use divs with class for attack coords
 
 export default function renderDOM () {
-  function initialiseBoard(boardContainer, board) {
+  function renderBoard(boardContainer, board) {
     const currentBoardState = board.getBoard;
     boardContainer.textContent = '';
     currentBoardState.forEach((row, x) => {
@@ -14,14 +14,15 @@ export default function renderDOM () {
 
   function createBoardSquare(x, y) {
     const square = document.createElement('div');
+    square.classList.add('game-square');
     square.dataset.x = x;
     square.dataset.y = y;
-    square.textContent = `[${x}, ${y}]`
+    // square.textContent = `[${x}, ${y}]`
     return square;
   }
 
   return {
-    initialiseBoard,
+    renderBoard,
     // displayBoard,
   }
 }
