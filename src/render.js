@@ -17,7 +17,7 @@ export default function renderDOM () {
     square.classList.add('game-square');
     square.dataset.x = x;
     square.dataset.y = y;
-    square.textContent = `[${x}, ${y}]`
+    // square.textContent = `[${x}, ${y}]`
     return square;
   }
 

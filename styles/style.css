@@ -1,5 +1,6 @@
 :root {
   --main-text: #ddd;
+  --background-color: #000
 }
 
 * {
@@ -9,18 +10,52 @@
   color: var(--main-text);
 }
 body {
-  background: #000;
+  background: var(--background-color);
 }
 
 div {
-  /* border: 1px black solid; */
+  /* border: 1px white solid; */
 }
 
-.board-container {
-  width: 50%;
+.dialogue {
   margin: 1rem auto;
+  width: 80%;
+  text-align: center;
+}
+
+.playing-board-container{
+  width: 50%;
+  margin: 0 auto;
+  display: none;
+  flex-direction: column;
+}
+
+.game-setup-container {
+  width: 75%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+.game-setup-ships-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;  
+}
+
+.game-setup-ship {
+  line-height: 2rem;
+}
+
+.setup-ship-square-container {
+  display: flex;
+}
+
+.setup-ship-square {
+  aspect-ratio: 1;
+  width: 1rem;
+  border: 1px var(--background-color) solid;
+  background: var(--main-text);
 }
 
 @media only screen and (min-width: 800px) {
@@ -29,21 +64,25 @@ div {
     width: 70%;
   }
 
-  .player1-board, .player2-board {
+  .player1-board, .player2-board{
     width: 50%;
     padding: 2rem;
+  }
+
+  .game-setup-board {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
 
-.player1-board, .player2-board {
+.player1-board, .player2-board, .game-setup-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   padding-top: 2rem;
 }
 
 .game-square {
-  /* width: 10px; */
   aspect-ratio: 1;
   background-color: #ddd;
   border: 1px solid black;
