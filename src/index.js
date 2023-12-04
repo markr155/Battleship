@@ -21,8 +21,7 @@ render.renderBoard(player2Board, comBoard);
 
 playerSetUpBoard.addEventListener('drop', (e) => {
   e.preventDefault();
-  // console.log(e.dataTransfer.mozSourceNode)
-  if (!e.dataTransfer.mozSourceNode.firstChild) console.log(e.dataTransfer.mozSourceNode)
+  console.log(e.dataTransfer.mozSourceNode)
 })
 playerSetUpBoard.addEventListener('dragover', (e) => {
   e.preventDefault();

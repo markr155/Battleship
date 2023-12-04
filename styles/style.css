@@ -41,6 +41,7 @@ div {
   display: flex;
   justify-content: space-around;
   margin-top: 1rem;  
+  text-align: center;
 }
 
 .game-setup-ship {
@@ -49,6 +50,7 @@ div {
 
 .setup-ship-square-container {
   display: flex;
+  justify-content: center;
 }
 
 .setup-ship-square {
@@ -64,14 +66,32 @@ div {
     width: 70%;
   }
 
+  .game-setup-container {
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
   .player1-board, .player2-board{
     width: 50%;
     padding: 2rem;
   }
 
   .game-setup-board {
-    width: 80%;
-    margin: 0 auto;
+    width: 50%;
+  }
+  .game-setup-ships-container {
+    display: block;
+    text-align: center; 
+    font-size: 1.5rem;
+  }
+
+  .setup-ship-square {
+    width: 1.5rem;
+  }
+  .game-setup-ship {
+    line-height: 2.5rem;
+    margin: 2rem;
   }
 }
 
