@@ -25,7 +25,7 @@ export default function gameBoard() {
       if (isHorizontal) {
         if (!!board[startX + i][startY]) return "Ship already placed";
       } else {
-    if (!!board[startX][startY + i]) return "Ship already placed";
+        if (!!board[startX][startY + i]) return "Ship already placed";
       }
     }
     // places ship on board
@@ -38,8 +38,8 @@ export default function gameBoard() {
       return {
         startX,
         startY,
-        isHorizontal
-      }
+        isHorizontal,
+      };
     }
     shipsPlaced.push(ship);
   };

@@ -7,13 +7,13 @@ console.clear();
 // Element Declaration
 const playerSetUpBoard = document.querySelector(".game-setup-board");
 const setUpShips = document.querySelectorAll(".setup-ship-square-container");
-const setUpContainer = document.querySelector('.game-setup-container');
-const playBoardContainer = document.querySelector('.playing-board-container');
+const setUpContainer = document.querySelector(".game-setup-container");
+const playBoardContainer = document.querySelector(".playing-board-container");
 const resetButton = document.querySelector(".reset-button");
 const startButton = document.querySelector(".start-button");
 const player1Board = document.querySelector(".player1-board");
 const player2Board = document.querySelector(".player2-board");
-const dialogue = document.querySelector('.dialogue');
+const dialogue = document.querySelector(".dialogue");
 
 const render = renderDOM();
 const playerBoard = gameBoard();
@@ -23,17 +23,16 @@ const game = gameController(playerBoard, comBoard);
 render.displayBoard(playerSetUpBoard, playerBoard);
 render.makeBoardDroppable(playerSetUpBoard);
 
-
 // Set up Reset and Start buttons
 resetButton.addEventListener("click", () =>
   render.displayBoard(playerSetUpBoard, playerBoard),
 );
 startButton.addEventListener("click", () => {
-  setUpContainer.style.display = 'none';
-  playBoardContainer.style.display = 'flex';
+  setUpContainer.style.display = "none";
+  playBoardContainer.style.display = "flex";
   render.displayBoard(player1Board, playerBoard);
   render.displayBoard(player2Board, comBoard, true);
-  dialogue.textContent = 'Click on the enemy board to issue an attack';
+  dialogue.textContent = "Click on the enemy board to issue an attack";
 });
 
 // Changes drag image to align with cursor
