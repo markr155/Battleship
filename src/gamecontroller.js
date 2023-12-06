@@ -35,12 +35,12 @@ export default function gameController(board1, board2) {
     },
   ];
 
-  testShips.forEach((ship) => {
-    board1.placeShip(ship.ship, ship.coord, ship.horizontal);
-  });
-  testShips.forEach((ship) => {
-    board2.placeShip(ship.ship, ship.coord, ship.horizontal);
-  });
+  // testShips.forEach((ship) => {
+  //   board1.placeShip(ship.ship, ship.coord, ship.horizontal);
+  // });
+  // testShips.forEach((ship) => {
+  //   board2.placeShip(ship.ship, ship.coord, ship.horizontal);
+  // });
 
   let currentPlayer = player1;
   let enemyBoard = board2;

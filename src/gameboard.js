@@ -12,14 +12,14 @@ export default function gameBoard() {
   const attacksHit = [];
   const shipsPlaced = [];
 
-  const placeShip = (ship, coord, isHorizontal, forSetup = false) => {
+  const placeShip = (ship, coord, isHorizontal) => {
     // isHorizontal == orientation boolean
     const [x, y] = coord;
     const length = ship.length;
     // sets starting x, y to ensure ship doesnt overflow
-    const startX = isHorizontal ? Math.min(x, boardSize - length) : x;
-    const startY = isHorizontal ? y : Math.min(y, boardSize - length);
-
+    // if horizontal, y position changes, if vertical, x position changes
+    const startX = isHorizontal ? x : Math.min(x, boardSize - ship.length);
+    const startY = isHorizontal ? Math.min(y, boardSize - ship.length) : y;
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
@@ -34,13 +34,7 @@ export default function gameBoard() {
         ? (board[startX + i][startY] = ship)
         : (board[startX][startY + i] = ship);
     }
-    if (!!forSetup) {
-      return {
-        startX,
-        startY,
-        isHorizontal,
-      };
-    }
+
     shipsPlaced.push(ship);
   };
 

@@ -1,17 +1,17 @@
 // Render board from getBoard function
 // use divs with class for attack coords
 import boardModule from "./gameboard.js";
-
+let boardSize;
 export default function renderDOM() {
-  let boardSize;
   function displayBoard(boardContainer, board, isClickable = false) {
-    boardSize = board.getBoard.length - 1;
+    boardSize = 10;
+    let displayBoardSize = board.getBoard.length - 1;
     const currentBoardState = board.getBoard;
     boardContainer.textContent = "";
     currentBoardState.forEach((row, x) => {
       row.forEach((col, y) => {
         boardContainer.appendChild(
-          createBoardSquare(boardSize - x, y, isClickable),
+          createBoardSquare(displayBoardSize - x, y, isClickable),
         );
       });
     });
@@ -62,17 +62,21 @@ export default function renderDOM() {
       : false;
     console.log(shipName, ship, [x, y], isHorizontal);
     // sets starting x, y to ensure ship doesnt overflow
-    const startX = isHorizontal ? Math.min(x, boardSize - ship.length) : x;
-    const startY = isHorizontal ? y : Math.min(y, boardSize - ship.length);
+    // if horizontal, y position changes, if vertical, x position changes
+    const startX = isHorizontal ? x : Math.min(x, boardSize - ship.length);
+    const startY = isHorizontal ? Math.min(y, boardSize - ship.length) : y;
     console.log(startX, startY);
+
     // checks if ship has already been placed
-    for (let i = 0; i < ship.length; i++) {
-      if (isHorizontal) {
-        if (!!board[startX + i][startY]) return "Ship already placed";
-      } else {
-        if (!!board[startX][startY + i]) return "Ship already placed";
-      }
-    }
+    // for (let i = 0; i < ship.length; i++) {
+    //   if (isHorizontal) {
+    //     if (!!board[startX + i][startY]) return "Ship already placed";
+    //   } else {
+    //     if (!!board[startX][startY + i]) return "Ship already placed";
+    //   }
+    // }
+    console.log(event.target.parentNode.childNodes);
+    console.log(document.querySelector(`[data-x='${startX}'][data-y='${startY}']`))
   }
 
   return {
