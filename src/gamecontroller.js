@@ -51,22 +51,20 @@ export default function gameController(board1, board2) {
       ? (currentPlayer = player2)
       : (currentPlayer = player1);
 
-    enemyBoard === board2
-      ? (enemyBoard = board1)
-      : (enemyBoard = board2);
+    enemyBoard === board2 ? (enemyBoard = board1) : (enemyBoard = board2);
   }
 
   const playRound = (coord) => {
     currentPlayer.issueAttack(enemyBoard, coord);
     if (enemyBoard.hasAllSunk()) gameFinish = true;
     switchCurrentPlayer();
-  }
+  };
 
   if (gameFinish) console.log("game finish");
 
   return {
     playRound,
-  }
+  };
 }
 // Each player places ships in config
 // human player goes first

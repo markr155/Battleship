@@ -14,7 +14,7 @@ export default [
       filename: "main.js",
       path: path.resolve(__dirname, "dist"),
     },
-    devtool: 'inline-source-map',
+    devtool: "inline-source-map",
     devServer: {
       watchFiles: ["src/*.html"],
       hot: true,

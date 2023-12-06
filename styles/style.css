@@ -24,7 +24,7 @@ div {
   text-align: center;
 }
 
-.playing-board-container{
+.playing-board-container {
   width: 50%;
   margin: 0 auto;
   display: none;
@@ -40,7 +40,7 @@ div {
 
 .game-setup-ships-container {
   display: flex;
-  justify-content: space-around; 
+  justify-content: space-around;
   text-align: center;
 }
 
@@ -59,9 +59,9 @@ div {
 }
 
 .game-setup-ship {
-    line-height: 2rem;
-    margin: 1rem;
-  }
+  line-height: 2rem;
+  margin: 1rem;
+}
 
 .setup-ship-square-container {
   display: flex;
@@ -82,10 +82,14 @@ div {
   aspect-ratio: 1;
   width: 1.5rem;
   border: 1px var(--background-color) solid;
-  background: var(--player-ship-bg)
+  background: var(--player-ship-bg);
 }
 
 @media only screen and (min-width: 800px) {
+  body {
+    font-size: 1.2rem;
+  }
+
   .board-container {
     flex-direction: row;
     width: 70%;
@@ -97,7 +101,13 @@ div {
     padding-bottom: 1rem;
   }
 
-  .player1-board, .player2-board{
+  .playing-board-container {
+    width: 90%;
+    flex-direction: row;
+  }
+
+  .player1-board,
+  .player2-board {
     width: 50%;
     padding: 2rem;
   }
@@ -124,19 +134,19 @@ div {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0.5rem
+    margin: 0.5rem;
   }
   .setup-button {
     margin: 0.5rem;
   }
 }
 
-
-.player1-board, .player2-board, .game-setup-board {
+.player1-board,
+.player2-board,
+.game-setup-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   padding-top: 2rem;
-  
 }
 
 .game-square {
@@ -146,7 +156,7 @@ div {
 }
 
 .game-square:hover {
-  background-color: #ddddddda
+  background-color: #ddddddda;
 }
 
 header {
