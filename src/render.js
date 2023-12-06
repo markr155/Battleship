@@ -1,8 +1,8 @@
 // Render board from getBoard function
   // use divs with class for attack coords
 
-export default function renderDOM () {
-  function renderBoard(boardContainer, board) {
+export default function renderDOM() {
+  function playBoard(boardContainer, board) {
     const currentBoardState = board.getBoard;
     boardContainer.textContent = '';
     currentBoardState.forEach((row, x) => {
@@ -21,8 +21,30 @@ export default function renderDOM () {
     return square;
   }
 
+  function setUpBoard(boardContainer, board) {
+    const currentBoardState = board.getBoard;
+    boardContainer.textContent = '';
+    currentBoardState.forEach((row, x) => {
+      row.forEach((col, y) => {
+        boardContainer.appendChild(createBoardSquare(x, y));
+      })
+    }) 
+  }
+
+  function makeBoardDroppable(board) {
+    board.addEventListener('drop', (e) => {
+      e.preventDefault();
+      console.log(e.dataTransfer.mozSourceNode)
+      console.log(e.target);
+    })
+    board.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    })
+  }
+
   return {
-    renderBoard,
-    // displayBoard,
+    playBoard,
+    setUpBoard,
+    makeBoardDroppable,
   }
 }

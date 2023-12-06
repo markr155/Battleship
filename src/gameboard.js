@@ -23,9 +23,9 @@ export default function gameBoard() {
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
-        if (board[startX + i][startY]) return "Ship already placed";
+        if (!!board[startX + i][startY]) return "Ship already placed";
       } else {
-        if (board[startX][startY + i]) return "Ship already placed";
+        if (!!board[startX][startY + i]) return "Ship already placed";
       }
     }
     // places ship on board
