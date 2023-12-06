@@ -26,7 +26,7 @@ render.makeBoardDroppable(playerSetUpBoard);
 
 // Set up Reset and Start buttons
 resetButton.addEventListener("click", () =>
-  render.setUpBoard(playerSetUpBoard, playerBoard),
+  render.displayBoard(playerSetUpBoard, playerBoard),
 );
 startButton.addEventListener("click", () => {
   setUpContainer.style.display = 'none';

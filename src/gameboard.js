@@ -12,7 +12,7 @@ export default function gameBoard() {
   const attacksHit = [];
   const shipsPlaced = [];
 
-  const placeShip = (ship, coord, isHorizontal) => {
+  const placeShip = (ship, coord, isHorizontal, forSetup = false) => {
     // isHorizontal == orientation boolean
     const [x, y] = coord;
     const length = ship.length;
@@ -33,6 +33,13 @@ export default function gameBoard() {
       isHorizontal
         ? (board[startX + i][startY] = ship)
         : (board[startX][startY + i] = ship);
+    }
+    if (!!forSetup) {
+      return {
+        startX,
+        startY,
+        isHorizontal
+      }
     }
     shipsPlaced.push(ship);
   };
