@@ -94,6 +94,7 @@ div {
   .game-setup-container {
     flex-direction: row;
     justify-content: space-evenly;
+    padding-bottom: 1rem;
   }
 
   .player1-board, .player2-board{
@@ -103,17 +104,30 @@ div {
 
   .game-setup-board {
     width: 60%;
-    height: 0;
+    /* height: 0; */
   }
   .game-setup-ships-container {
-    display: block;
-    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
     font-size: 1.5rem;
+    width: 30%;
   }
 
   .game-setup-ship {
     line-height: 2.5rem;
-    margin: 2rem;
+    /* margin: 2rem; */
+  }
+
+  .game-setup-buttons-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem
+  }
+  .setup-button {
+    margin: 0.5rem;
   }
 }
 
