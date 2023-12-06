@@ -8,10 +8,10 @@ export default function renderDOM() {
     let displayBoardSize = board.getBoard.length - 1;
     const currentBoardState = board.getBoard;
     boardContainer.textContent = "";
-    currentBoardState.forEach((row, x) => {
-      row.forEach((col, y) => {
+    currentBoardState.forEach((row, y) => {
+      row.forEach((col, x) => {
         boardContainer.appendChild(
-          createBoardSquare(displayBoardSize - x, y, isClickable),
+          createBoardSquare(x, displayBoardSize - y, isClickable),
         );
       });
     });
@@ -63,22 +63,46 @@ export default function renderDOM() {
     console.log(shipName, ship, [x, y], isHorizontal);
     // sets starting x, y to ensure ship doesnt overflow
     // if horizontal, y position changes, if vertical, x position changes
-    const startX = isHorizontal ? x : Math.min(x, boardSize - ship.length);
-    const startY = isHorizontal ? Math.min(y, boardSize - ship.length) : y;
-    console.log(startX, startY);
+    const startX = parseInt(
+      isHorizontal ? Math.min(x, boardSize - ship.length) : x,
+    );
+    const startY = parseInt(isHorizontal ? y : Math.max(y, ship.length - 1));
 
     // checks if ship has already been placed
-    // for (let i = 0; i < ship.length; i++) {
-    //   if (isHorizontal) {
-    //     if (!!board[startX + i][startY]) return "Ship already placed";
-    //   } else {
-    //     if (!!board[startX][startY + i]) return "Ship already placed";
-    //   }
-    // }
-    console.log(event.target.parentNode.childNodes);
-    console.log(document.querySelector(`[data-x='${startX}'][data-y='${startY}']`))
-  }
+    for (let i = 0; i < ship.length; i++) {
+      let square = document
+        .querySelector(`[data-x='${startX}'][data-y='${startY}']`)
+        .classList.contains("ship");
 
+      if (isHorizontal) {
+        if (
+          document
+            .querySelector(`[data-x='${startX}'][data-y='${startY + i}']`)
+            .classList.contains("ship")
+        )
+          return "Ship already placed";
+      } else {
+        if (
+          document
+            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
+            .classList.contains("ship")
+        )
+          return "Ship already placed";
+      }
+    }
+    // places ship on board
+    for (let i = 0; i < ship.length; i++) {
+      // isHorizontal ? console.log(startX + i) : console.log(startY - i)
+
+      isHorizontal
+        ? document
+            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
+            .classList.add("ship")
+        : document
+            .querySelector(`[data-x='${startX}'][data-y='${startY - i}']`)
+            .classList.add("ship");
+    }
+  }
   return {
     displayBoard,
     makeBoardDroppable,
