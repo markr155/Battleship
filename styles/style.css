@@ -2,6 +2,9 @@
   --main-text: #ddd;
   --background-color: #000;
   --player-ship-bg: blue;
+  --clickable-hover: #ff9191e9; 
+  --clickable-active: #ff9191a9; 
+  
 }
 
 * {
@@ -146,17 +149,25 @@ div {
 .game-setup-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  padding-top: 2rem;
+  margin-top: 2rem;  
 }
 
 .game-square {
   aspect-ratio: 1;
-  background-color: #ddd;
   border: 1px solid black;
+  background: var(--main-text);
 }
 
-.game-square:hover {
-  background-color: #ddddddda;
+.clickable:hover {
+  background: var(--clickable-hover);
+}
+
+.clickable:active {
+  background: var(--clickable-active);
+}
+
+.ship {
+  background: var(--player-ship-bg)
 }
 
 header {

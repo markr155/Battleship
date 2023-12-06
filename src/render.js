@@ -2,40 +2,32 @@
 // use divs with class for attack coords
 
 export default function renderDOM() {
-  function playBoard(boardContainer, board) {
+  function displayBoard(boardContainer, board, isClickable = false) {
     const currentBoardState = board.getBoard;
     boardContainer.textContent = "";
     currentBoardState.forEach((row, x) => {
       row.forEach((col, y) => {
-        boardContainer.appendChild(createBoardSquare(x, y));
+        boardContainer.appendChild(createBoardSquare(x, y, isClickable));
       });
     });
   }
 
-  function createBoardSquare(x, y) {
+  function createBoardSquare(x, y, isClickable) {
     const square = document.createElement("div");
     square.classList.add("game-square");
+    if (!!isClickable) square.classList.add("clickable");
     square.dataset.x = x;
     square.dataset.y = y;
     // square.textContent = `[${x}, ${y}]`
     return square;
   }
 
-  function setUpBoard(boardContainer, board) {
-    const currentBoardState = board.getBoard;
-    boardContainer.textContent = "";
-    currentBoardState.forEach((row, x) => {
-      row.forEach((col, y) => {
-        boardContainer.appendChild(createBoardSquare(x, y));
-      });
-    });
-  }
-
   function makeBoardDroppable(board) {
     board.addEventListener("drop", (e) => {
       e.preventDefault();
-      console.log(e.dataTransfer.mozSourceNode);
+      // console.log(e.dataTransfer.mozSourceNode);
       console.log(e.target);
+      e.target.classList.add('ship');
     });
     board.addEventListener("dragover", (e) => {
       e.preventDefault();
@@ -43,8 +35,7 @@ export default function renderDOM() {
   }
 
   return {
-    playBoard,
-    setUpBoard,
+    displayBoard,
     makeBoardDroppable,
   };
 }

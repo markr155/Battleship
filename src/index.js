@@ -20,7 +20,7 @@ const playerBoard = gameBoard();
 const comBoard = gameBoard();
 const game = gameController(playerBoard, comBoard);
 
-render.setUpBoard(playerSetUpBoard, playerBoard);
+render.displayBoard(playerSetUpBoard, playerBoard);
 render.makeBoardDroppable(playerSetUpBoard);
 
 
@@ -31,8 +31,8 @@ resetButton.addEventListener("click", () =>
 startButton.addEventListener("click", () => {
   setUpContainer.style.display = 'none';
   playBoardContainer.style.display = 'flex';
-  render.playBoard(player1Board, playerBoard);
-  render.playBoard(player2Board, comBoard);
+  render.displayBoard(player1Board, playerBoard);
+  render.displayBoard(player2Board, comBoard, true);
   dialogue.textContent = 'Click on the enemy board to issue an attack';
 });
 
