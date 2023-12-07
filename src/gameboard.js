@@ -1,3 +1,4 @@
+import ship from "./ship.js";
 export default function gameBoard() {
   // Set board length/width
   const boardSize = 10;
@@ -14,12 +15,23 @@ export default function gameBoard() {
 
   const placeShip = (ship, coord, isHorizontal) => {
     // isHorizontal == orientation boolean
-    const [x, y] = coord;
+    const x = parseInt(coord[0]);
+    const y = parseInt(coord[1]);
     const length = ship.length;
+    console.log(
+      board,
+      `
+    ship: ${ship},
+    coord: ${coord},
+    ishori: ${isHorizontal},
+    length: ${length}`,
+    );
     // sets starting x, y to ensure ship doesnt overflow
     // if horizontal, y position changes, if vertical, x position changes
-    const startX = isHorizontal ? Math.min(x, boardSize - ship.length) : x;
-    const startY = isHorizontal ? y : Math.min(y, boardSize - ship.length);
+    const startX = parseInt(
+      isHorizontal ? Math.min(x, boardSize - ship.length) : x,
+    );
+    const startY = parseInt(isHorizontal ? y : Math.max(y, ship.length - 1));
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
@@ -28,6 +40,8 @@ export default function gameBoard() {
         if (!!board[startX][startY + i]) return "Ship already placed";
       }
     }
+    console.log([x, y]);
+    console.log(ship, startX, startY);
     // places ship on board
     for (let i = 0; i < length; i++) {
       isHorizontal
@@ -78,6 +92,8 @@ export default function gameBoard() {
     return shipsSunk.length == shipsPlaced.length ? true : false;
   };
 
+  function addSetupShipsToPlayerBoard(playerShipsPlaced) {}
+
   return {
     placeShip,
     receiveAttack,
@@ -88,6 +104,7 @@ export default function gameBoard() {
       return attacksMissed;
     },
     hasAllSunk,
+    addSetupShipsToPlayerBoard,
   };
 }
 // checks if square has been hit before

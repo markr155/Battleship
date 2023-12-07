@@ -4,12 +4,12 @@ export default function renderDOM() {
   function displayBoard(boardContainer, board, isClickable = false) {
     boardSize = 10;
     let displayBoardSize = board.getBoard.length - 1;
-    const currentBoardState = board.getBoard;
     boardContainer.textContent = "";
-    currentBoardState.forEach((row, y) => {
+    board.getBoard.forEach((row, y) => {
       row.forEach((col, x) => {
         const square = createBoardSquare(x, displayBoardSize - y, isClickable);
-        if (!!currentBoardState[x][y]) square.classList.add("ship");
+        if (!!board.getBoard[x][boardSize - 1 - y])
+          square.classList.add("ship");
         boardContainer.appendChild(square);
       });
     });
@@ -49,12 +49,7 @@ export default function renderDOM() {
 
   function setUpBoardDrop(event) {
     event.preventDefault();
-    console.log(playerShipsPlaced);
-    // error handling
-    if (!event.dataTransfer.mozSourceNode) {
-      console.log("no ship selected");
-      return;
-    }
+
     const shipToDrop = event.dataTransfer.mozSourceNode;
     const shipName = shipToDrop.id;
     const ship = shipLengths(shipName);
@@ -65,7 +60,11 @@ export default function renderDOM() {
     )
       ? true
       : false;
-    console.log(shipName, ship, [x, y], isHorizontal);
+    // error handling
+    if (!ship) {
+      console.log("no ship selected");
+      return;
+    }
     // sets starting x, y to ensure ship doesnt overflow
     // if horizontal, y position changes, if vertical, x position changes
     const startX = parseInt(
@@ -94,7 +93,6 @@ export default function renderDOM() {
     }
     // places ship on board
     for (let i = 0; i < ship.length; i++) {
-      // isHorizontal ? console.log(startX + i) : console.log(startY - i)
       isHorizontal
         ? document
             .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
@@ -106,7 +104,7 @@ export default function renderDOM() {
     // Toggles Ship displaying after being placed
     shipToDrop.classList.toggle("placed");
     playerShipsPlaced.push({
-      length: ship,
+      length: ship.length,
       coord: [x, y],
       horizontal: isHorizontal,
     });

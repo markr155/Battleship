@@ -1,4 +1,5 @@
 import css from "../styles/style.css";
+import ship from "../src/ship.js";
 import gameBoard from "../src/gameboard.js";
 import gameController from "../src/gamecontroller.js";
 import renderDOM from "../src/render.js";
@@ -11,8 +12,8 @@ const setUpContainer = document.querySelector(".game-setup-container");
 const playBoardContainer = document.querySelector(".playing-board-container");
 const resetButton = document.querySelector(".reset-button");
 const startButton = document.querySelector(".start-button");
-const player1Board = document.querySelector(".player1-board");
-const player2Board = document.querySelector(".player2-board");
+const playerBoardDisplay = document.querySelector(".player1-board");
+const player2BoardDisplay = document.querySelector(".player2-board");
 const dialogue = document.querySelector(".dialogue");
 
 const render = renderDOM();
@@ -27,19 +28,23 @@ render.makeBoardDroppable(playerSetUpBoard);
 resetButton.addEventListener("click", () => {
   render.displayBoard(playerSetUpBoard, playerBoard);
   render.resetSetupBoard(setUpShips);
-  if (!dialogue.lastChild.classList.contains("hidden"))
-    dialogue.lastChild.classList.add("hidden");
+  if (!dialogue.querySelector("h4").classList.contains("hidden"))
+    dialogue.querySelector("h4").classList.add("hidden");
 });
 startButton.addEventListener("click", () => {
   const placedShips = render.getPlayerSetup();
   if (!!placedShips) {
     setUpContainer.style.display = "none";
     playBoardContainer.style.display = "flex";
-    render.displayBoard(player1Board, playerBoard);
-    render.displayBoard(player2Board, comBoard, true);
+    render.getPlayerSetup().forEach((shipPlaced) => {
+      const newShip = ship(shipPlaced.length);
+      playerBoard.placeShip(newShip, shipPlaced.coord, shipPlaced.horizontal);
+    });
+    render.displayBoard(playerBoardDisplay, playerBoard);
+    render.displayBoard(player2BoardDisplay, comBoard, true);
     dialogue.textContent = "Click on the enemy board to issue an attack";
   } else {
-    dialogue.lastChild.classList.remove("hidden");
+    dialogue.querySelector("h4").classList.remove("hidden");
   }
 });
 
