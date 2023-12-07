@@ -24,15 +24,23 @@ render.displayBoard(playerSetUpBoard, playerBoard);
 render.makeBoardDroppable(playerSetUpBoard);
 
 // Set up Reset and Start buttons
-resetButton.addEventListener("click", () =>
-  render.displayBoard(playerSetUpBoard, playerBoard),
-);
+resetButton.addEventListener("click", () => {
+  render.displayBoard(playerSetUpBoard, playerBoard);
+  render.resetSetupBoard(setUpShips);
+  if (!dialogue.lastChild.classList.contains("hidden"))
+    dialogue.lastChild.classList.add("hidden");
+});
 startButton.addEventListener("click", () => {
-  setUpContainer.style.display = "none";
-  playBoardContainer.style.display = "flex";
-  render.displayBoard(player1Board, playerBoard);
-  render.displayBoard(player2Board, comBoard, true);
-  dialogue.textContent = "Click on the enemy board to issue an attack";
+  const placedShips = render.getPlayerSetup();
+  if (!!placedShips) {
+    setUpContainer.style.display = "none";
+    playBoardContainer.style.display = "flex";
+    render.displayBoard(player1Board, playerBoard);
+    render.displayBoard(player2Board, comBoard, true);
+    dialogue.textContent = "Click on the enemy board to issue an attack";
+  } else {
+    dialogue.lastChild.classList.remove("hidden");
+  }
 });
 
 // Changes drag image to align with cursor

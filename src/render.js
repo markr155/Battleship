@@ -1,8 +1,6 @@
-// Render board from getBoard function
-// use divs with class for attack coords
-import boardModule from "./gameboard.js";
-let boardSize;
 export default function renderDOM() {
+  let boardSize;
+  let playerShipsPlaced = [];
   function displayBoard(boardContainer, board, isClickable = false) {
     boardSize = 10;
     let displayBoardSize = board.getBoard.length - 1;
@@ -10,9 +8,9 @@ export default function renderDOM() {
     boardContainer.textContent = "";
     currentBoardState.forEach((row, y) => {
       row.forEach((col, x) => {
-        boardContainer.appendChild(
-          createBoardSquare(x, displayBoardSize - y, isClickable),
-        );
+        const square = createBoardSquare(x, displayBoardSize - y, isClickable);
+        if (!!currentBoardState[x][y]) square.classList.add("ship");
+        boardContainer.appendChild(square);
       });
     });
   }
@@ -51,7 +49,14 @@ export default function renderDOM() {
 
   function setUpBoardDrop(event) {
     event.preventDefault();
-    const shipName = event.dataTransfer.mozSourceNode.id;
+    console.log(playerShipsPlaced);
+    // error handling
+    if (!event.dataTransfer.mozSourceNode) {
+      console.log("no ship selected");
+      return;
+    }
+    const shipToDrop = event.dataTransfer.mozSourceNode;
+    const shipName = shipToDrop.id;
     const ship = shipLengths(shipName);
     const x = event.target.dataset.x;
     const y = event.target.dataset.y;
@@ -70,21 +75,18 @@ export default function renderDOM() {
 
     // checks if ship has already been placed
     for (let i = 0; i < ship.length; i++) {
-      let square = document
-        .querySelector(`[data-x='${startX}'][data-y='${startY}']`)
-        .classList.contains("ship");
-
+      let square = document;
       if (isHorizontal) {
         if (
           document
-            .querySelector(`[data-x='${startX}'][data-y='${startY + i}']`)
+            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
             .classList.contains("ship")
         )
           return "Ship already placed";
       } else {
         if (
           document
-            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
+            .querySelector(`[data-x='${startX}'][data-y='${startY - i}']`)
             .classList.contains("ship")
         )
           return "Ship already placed";
@@ -93,7 +95,6 @@ export default function renderDOM() {
     // places ship on board
     for (let i = 0; i < ship.length; i++) {
       // isHorizontal ? console.log(startX + i) : console.log(startY - i)
-
       isHorizontal
         ? document
             .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
@@ -102,9 +103,37 @@ export default function renderDOM() {
             .querySelector(`[data-x='${startX}'][data-y='${startY - i}']`)
             .classList.add("ship");
     }
+    // Toggles Ship displaying after being placed
+    shipToDrop.classList.toggle("placed");
+    playerShipsPlaced.push({
+      length: ship,
+      coord: [x, y],
+      horizontal: isHorizontal,
+    });
   }
+
+  function resetSetupBoard(setupShipElements) {
+    setupShipElements.forEach((ship) => {
+      if (ship.classList.contains("placed")) ship.classList.remove("placed");
+      if (ship.classList.contains("vertical")) {
+        ship.classList.remove("vertical");
+        ship.classList.add("horizontal");
+      }
+    });
+    playerShipsPlaced = [];
+  }
+
+  function getPlayerSetup() {
+    if (playerShipsPlaced.length < 5) {
+      return;
+    }
+    return playerShipsPlaced;
+  }
+
   return {
     displayBoard,
     makeBoardDroppable,
+    resetSetupBoard,
+    getPlayerSetup,
   };
 }

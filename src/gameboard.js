@@ -18,8 +18,8 @@ export default function gameBoard() {
     const length = ship.length;
     // sets starting x, y to ensure ship doesnt overflow
     // if horizontal, y position changes, if vertical, x position changes
-    const startX = isHorizontal ? x : Math.min(x, boardSize - ship.length);
-    const startY = isHorizontal ? Math.min(y, boardSize - ship.length) : y;
+    const startX = isHorizontal ? Math.min(x, boardSize - ship.length) : x;
+    const startY = isHorizontal ? y : Math.min(y, boardSize - ship.length);
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {

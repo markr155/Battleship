@@ -169,6 +169,14 @@ div {
   background: var(--player-ship-bg);
 }
 
+.placed {
+  display: none;
+}
+
+.hidden {
+  opacity: 0;
+}
+
 header {
   text-align: center;
 }
