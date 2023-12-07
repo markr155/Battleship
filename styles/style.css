@@ -115,7 +115,7 @@ div {
   }
 
   .game-setup-board {
-    width: 60%;
+    width: 65%;
     /* height: 0; */
   }
   .game-setup-ships-container {
@@ -139,6 +139,7 @@ div {
     margin: 0.5rem;
   }
   .setup-button {
+    width: 80%;
     margin: 0.5rem;
   }
 }

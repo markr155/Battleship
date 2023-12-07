@@ -1,3 +1,5 @@
+import gameController from "./gamecontroller.js";
+const game = gameController();
 export default function renderDOM() {
   let boardSize;
   let playerShipsPlaced = [];
@@ -18,7 +20,12 @@ export default function renderDOM() {
   function createBoardSquare(x, y, isClickable) {
     const square = document.createElement("div");
     square.classList.add("game-square");
-    if (!!isClickable) square.classList.add("clickable");
+    if (!!isClickable) {
+      square.classList.add("clickable");
+      square.addEventListener("click", (e) => {
+        console.log(e.target);
+      });
+    }
     square.dataset.x = x;
     square.dataset.y = y;
     // square.textContent = `[${x}, ${y}]`
