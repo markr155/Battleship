@@ -137,7 +137,10 @@ export default function renderDOM() {
   function attackEnemyOnClick(enemyBoard, gameController) {
     enemyBoard.childNodes.forEach((square) => {
       square.addEventListener("click", (e) => {
-        console.log(e.target);
+        const x = e.target.dataset.x;
+        const y = e.target.dataset.y;
+        const result = gameController.playRound([x, y]);
+        console.log(result);
       });
     });
   }

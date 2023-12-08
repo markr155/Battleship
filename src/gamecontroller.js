@@ -54,10 +54,11 @@ export default function gameController(board1, board2) {
     enemyBoard === board2 ? (enemyBoard = board1) : (enemyBoard = board2);
   }
 
-  const playRound = (coord) => {
-    currentPlayer.issueAttack(enemyBoard, coord);
+  const playRound = (coord, enemyBoard) => {
+    const result = currentPlayer.issueAttack(enemyBoard, coord);
     if (enemyBoard.hasAllSunk()) gameFinish = true;
     switchCurrentPlayer();
+    return result;
   };
 
   if (gameFinish) console.log("game finish");
