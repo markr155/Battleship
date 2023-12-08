@@ -66,13 +66,13 @@ export default function gameBoard() {
     if (hasBeenAttacked) return "Square already attacked";
 
     const tarSquare = board[x][y];
-    if (tarSquare) {
+    if (!!tarSquare) {
       tarSquare.hit();
       attacksHit.push([x, y]);
-      return "Hit!";
+      return "hit";
     } else {
       attacksMissed.push([x, y]);
-      return "Miss!";
+      return "miss";
     }
   };
 

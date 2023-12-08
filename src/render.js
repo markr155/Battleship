@@ -53,7 +53,6 @@ export default function renderDOM() {
 
   function setUpBoardDrop(event) {
     event.preventDefault();
-
     const shipToDrop = event.dataTransfer.mozSourceNode;
     const shipName = shipToDrop.id;
     const ship = shipLengths(shipName);
@@ -134,13 +133,24 @@ export default function renderDOM() {
     return playerShipsPlaced;
   }
 
-  function attackEnemyOnClick(enemyBoard, gameController) {
-    enemyBoard.childNodes.forEach((square) => {
+  function attackEnemyOnClick(
+    enemyBoardDisplay,
+    gameController,
+    enemyBoard,
+    playerBoard,
+  ) {
+    enemyBoardDisplay.childNodes.forEach((square) => {
       square.addEventListener("click", (e) => {
         const x = e.target.dataset.x;
         const y = e.target.dataset.y;
-        const result = gameController.playRound([x, y]);
+        const result = gameController.playRound([x, y], enemyBoard);
         console.log(result);
+        if (result === "hit") {
+          square.classList.add("hit");
+        } else if (result === "miss") {
+          square.classList.add("miss");
+        }
+        gameController.playRound([x, y], playerBoard);
       });
     });
   }

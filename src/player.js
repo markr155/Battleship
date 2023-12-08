@@ -1,6 +1,7 @@
 export default function newPlayer(initialName) {
   const name = initialName;
-  const compAttacks = [];
+  const comAttacks = [];
+
   function computerAttackCoord() {
     let x;
     let y;
@@ -10,11 +11,11 @@ export default function newPlayer(initialName) {
       isValidAttack = true;
       x = Math.floor(Math.random() * 10);
       y = Math.floor(Math.random() * 10);
-      compAttacks.forEach((coord) => {
+      comAttacks.forEach((coord) => {
         if (coord[0] === x && coord[1] === y) isValidAttack = false;
       });
     }
-    compAttacks.push([x, y]);
+    comAttacks.push([x, y]);
     return [x, y];
   }
 
@@ -23,7 +24,7 @@ export default function newPlayer(initialName) {
       if (name === "Computer") {
         coord = computerAttackCoord();
       }
-      board.receiveAttack(coord);
+      return board.receiveAttack(coord);
     },
     computerAttackCoord,
   };

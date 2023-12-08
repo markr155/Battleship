@@ -13,35 +13,33 @@ export default function gameController(board1, board2) {
       coord: [0, 0],
       horizontal: true,
     },
-    {
-      ship: newShip(3),
-      coord: [0, 1],
-      horizontal: true,
-    },
-    {
-      ship: newShip(3),
-      coord: [0, 4],
-      horizontal: true,
-    },
-    {
-      ship: newShip(4),
-      coord: [5, 9],
-      horizontal: false,
-    },
-    {
-      ship: newShip(5),
-      coord: [9, 9],
-      horizontal: false,
-    },
+    // {
+    //   ship: newShip(3),
+    //   coord: [0, 1],
+    //   horizontal: true,
+    // },
+    // {
+    //   ship: newShip(3),
+    //   coord: [0, 4],
+    //   horizontal: true,
+    // },
+    // {
+    //   ship: newShip(4),
+    //   coord: [5, 9],
+    //   horizontal: false,
+    // },
+    // {
+    //   ship: newShip(5),
+    //   coord: [9, 9],
+    //   horizontal: false,
+    // },
   ];
 
-  // testShips.forEach((ship) => {
-  //   board1.placeShip(ship.ship, ship.coord, ship.horizontal);
-  // });
-  // testShips.forEach((ship) => {
-  //   board2.placeShip(ship.ship, ship.coord, ship.horizontal);
-  // });
-
+  function placeComShips() {
+    testShips.forEach((ship) => {
+      board2.placeShip(ship.ship, ship.coord, ship.horizontal);
+    });
+  }
   let currentPlayer = player1;
   let enemyBoard = board2;
   let gameFinish = false;
@@ -57,14 +55,14 @@ export default function gameController(board1, board2) {
   const playRound = (coord, enemyBoard) => {
     const result = currentPlayer.issueAttack(enemyBoard, coord);
     if (enemyBoard.hasAllSunk()) gameFinish = true;
+    if (!!gameFinish) console.log("game finish");
     switchCurrentPlayer();
     return result;
   };
 
-  if (gameFinish) console.log("game finish");
-
   return {
     playRound,
+    placeComShips,
   };
 }
 // Each player places ships in config

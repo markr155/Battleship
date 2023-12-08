@@ -4,6 +4,8 @@
   --player-ship-bg: blue;
   --clickable-hover: #ff9191e9;
   --clickable-active: #ff9191a9;
+  --hit: #ff1313;
+  --miss: #1d19688b;
 }
 
 * {
@@ -180,4 +182,12 @@ div {
 
 header {
   text-align: center;
+}
+
+.hit {
+  background: var(--hit);
+}
+
+.miss {
+  background: var(--miss);
 }

@@ -41,10 +41,11 @@ startButton.addEventListener("click", () => {
       const newShip = ship(shipPlaced.length);
       playerBoard.placeShip(newShip, shipPlaced.coord, shipPlaced.horizontal);
     });
+    game.placeComShips();
     render.displayBoard(playerBoardDisplay, playerBoard);
     render.displayBoard(player2BoardDisplay, comBoard, true);
     dialogue.textContent = "Click on the enemy board to issue an attack";
-    render.attackEnemyOnClick(player2BoardDisplay, game);
+    render.attackEnemyOnClick(player2BoardDisplay, game, comBoard, playerBoard);
   } else {
     dialogue.querySelector("h4").classList.remove("hidden");
   }
