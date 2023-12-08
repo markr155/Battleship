@@ -18,14 +18,6 @@ export default function gameBoard() {
     const x = parseInt(coord[0]);
     const y = parseInt(coord[1]);
     const length = ship.length;
-    console.log(
-      board,
-      `
-    ship: ${ship},
-    coord: ${coord},
-    ishori: ${isHorizontal},
-    length: ${length}`,
-    );
     // sets starting x, y to ensure ship doesnt overflow
     // if horizontal, y position changes, if vertical, x position changes
     const startX = parseInt(
@@ -40,8 +32,6 @@ export default function gameBoard() {
         if (!!board[startX][startY + i]) return "Ship already placed";
       }
     }
-    console.log([x, y]);
-    console.log(ship, startX, startY);
     // places ship on board
     for (let i = 0; i < length; i++) {
       isHorizontal

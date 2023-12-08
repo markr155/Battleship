@@ -22,9 +22,6 @@ export default function renderDOM() {
     square.classList.add("game-square");
     if (!!isClickable) {
       square.classList.add("clickable");
-      square.addEventListener("click", (e) => {
-        console.log(e.target);
-      });
     }
     square.dataset.x = x;
     square.dataset.y = y;
@@ -109,7 +106,9 @@ export default function renderDOM() {
             .classList.add("ship");
     }
     // Toggles Ship displaying after being placed
-    shipToDrop.classList.toggle("placed");
+    if (shipToDrop instanceof HTMLElement) {
+      shipToDrop.classList.toggle("placed");
+    }
     playerShipsPlaced.push({
       length: ship.length,
       coord: [x, y],
@@ -135,10 +134,52 @@ export default function renderDOM() {
     return playerShipsPlaced;
   }
 
+  function attackEnemyOnClick(enemyBoard, gameController) {
+    enemyBoard.childNodes.forEach((square) => {
+      square.addEventListener("click", (e) => {
+        console.log(e.target);
+      });
+    });
+  }
+
+  function dummyShipDrop(shipName, x, y, isHorizontal) {
+    const ship = shipLengths(shipName);
+    const dummyEvent = {
+      preventDefault: () => {},
+      dataTransfer: {
+        mozSourceNode: {
+          id: shipName,
+          classList: {
+            contains: (className) => (className = isHorizontal),
+          },
+        },
+      },
+      target: {
+        dataset: { x, y },
+      },
+    };
+    setUpBoardDrop(dummyEvent);
+  }
+  function randomiseSetup(setupShips) {
+    dummyShipDrop("carrier", 0, 1, true);
+    dummyShipDrop("battleship", 6, 1, false);
+    dummyShipDrop("destroyer", 2, 9, true);
+    dummyShipDrop("submarine", 2, 5, true);
+    dummyShipDrop("patrol-boat", 9, 7, false);
+    setupShips.forEach((ship) => ship.classList.add("placed"));
+  }
+
+  function randCoord() {
+    const x = Math.floor(Math.random() * 10);
+    return x;
+  }
+
   return {
     displayBoard,
     makeBoardDroppable,
     resetSetupBoard,
     getPlayerSetup,
+    attackEnemyOnClick,
+    randomiseSetup,
   };
 }

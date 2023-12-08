@@ -12,6 +12,7 @@ const setUpContainer = document.querySelector(".game-setup-container");
 const playBoardContainer = document.querySelector(".playing-board-container");
 const resetButton = document.querySelector(".reset-button");
 const startButton = document.querySelector(".start-button");
+const randomButton = document.querySelector(".random-button");
 const playerBoardDisplay = document.querySelector(".player1-board");
 const player2BoardDisplay = document.querySelector(".player2-board");
 const dialogue = document.querySelector(".dialogue");
@@ -43,9 +44,14 @@ startButton.addEventListener("click", () => {
     render.displayBoard(playerBoardDisplay, playerBoard);
     render.displayBoard(player2BoardDisplay, comBoard, true);
     dialogue.textContent = "Click on the enemy board to issue an attack";
+    render.attackEnemyOnClick(player2BoardDisplay, game);
   } else {
     dialogue.querySelector("h4").classList.remove("hidden");
   }
+});
+// Set up random setup button
+randomButton.addEventListener("click", () => {
+  render.randomiseSetup(setUpShips);
 });
 
 // Changes drag image to align with cursor
