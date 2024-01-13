@@ -32,6 +32,7 @@ resetButton.addEventListener("click", () => {
   if (!dialogue.querySelector("h4").classList.contains("hidden"))
     dialogue.querySelector("h4").classList.add("hidden");
 });
+
 startButton.addEventListener("click", () => {
   const placedShips = render.getPlayerSetup();
   if (!!placedShips) {

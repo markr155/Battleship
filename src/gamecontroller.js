@@ -1,44 +1,39 @@
 import newPlayer from "../src/player.js";
 import gameBoard from "../src/gameboard.js";
 import newShip from "../src/ship.js";
-// Set up game loop
 
 export default function gameController(board1, board2) {
+  const board = gameBoard();
   const player1 = newPlayer("Human");
   const player2 = newPlayer("Computer");
 
-  const testShips = [
+  const shipList = [
     {
       ship: newShip(2),
-      coord: [0, 0],
-      horizontal: true,
     },
     {
       ship: newShip(3),
-      coord: [0, 1],
-      horizontal: true,
     },
     {
       ship: newShip(3),
-      coord: [0, 4],
-      horizontal: true,
     },
     {
       ship: newShip(4),
-      coord: [5, 9],
-      horizontal: false,
     },
     {
       ship: newShip(5),
-      coord: [9, 9],
-      horizontal: false,
     },
   ];
 
-  function placeComShips() {
-    testShips.forEach((ship) => {
-      board2.placeShip(ship.ship, ship.coord, ship.horizontal);
+  function placeComShips(ships = shipList) {
+    const failedShips = [];
+    ships.forEach((ship) => {
+      const coord = [Math.floor(Math.random() * board2.boardSize), Math.floor(Math.random() * board.boardSize)]
+      const horizontal = Math.random() > 0.5;
+      const result = board2.placeShip(ship.ship, coord, horizontal);
+      if (result) failedShips.push({ship: newShip(result)});
     });
+    if (failedShips[0]) placeComShips(failedShips);
   }
   let currentPlayer = player1;
   let enemyBoard = board2;

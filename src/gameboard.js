@@ -27,9 +27,9 @@ export default function gameBoard(isComputer = false) {
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
-        if (!!board[startX + i][startY]) return "Ship already placed";
+        if (!!board[startX + i][startY]) return ship.length;
       } else {
-        if (!!board[startX][startY + i]) return "Ship already placed";
+        if (!!board[startX][startY + i]) return ship.length;
       }
     }
     // places ship on board
@@ -40,6 +40,7 @@ export default function gameBoard(isComputer = false) {
     }
 
     shipsPlaced.push(ship);
+    return null;
   };
 
   const receiveAttack = (coord) => {
@@ -83,6 +84,7 @@ export default function gameBoard(isComputer = false) {
   };
 
   return {
+    boardSize,
     placeShip,
     receiveAttack,
     get getBoard() {
