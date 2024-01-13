@@ -53,6 +53,7 @@ export default function gameController(board1, board2) {
 
   const playRound = (coord, enemyBoard) => {
     const result = (currentPlayer.issueAttack(enemyBoard, coord));
+    if (result === 'Square already attacked') return;
     if (enemyBoard.hasAllSunk()) gameFinish = true;
     if (!!gameFinish) return `${currentPlayer} wins!`;
     switchCurrentPlayer();

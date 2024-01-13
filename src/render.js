@@ -4,6 +4,7 @@ export default function renderDOM() {
 	let boardSize = 10;
 	let playerShipsPlaced = [];
 	let comShipsPlaced = [];
+  const dialogue = document.querySelector('.dialogue');
 
 	function displayBoard(boardContainer, board, isClickable = false) {
 		let displayBoardSize = board.getBoard.length - 1;
@@ -134,33 +135,60 @@ export default function renderDOM() {
 		playerBoard
 	) {
 		enemyBoardDisplay.childNodes.forEach((square) => {
+
 			square.addEventListener('click', (e) => {
+        dialogue.textContent = '';
 				const playerCoords = [e.target.dataset.x, e.target.dataset.y];
+        dialogue.appendChild(attackingText(playerCoords));
 				const playerResult = gameController.playRound(playerCoords, enemyBoard);
 				const comResult = gameController.playRound(playerCoords, playerBoard);
+        if (!playerResult || !comResult) return;
         const comSquare = playerBoardDisplay.querySelector(`[data-x="${comResult[1][0]}"][data-y="${comResult[1][1]}"]`);
         console.log('player: ', playerResult);
-        console.log('comp: ', comSquare)
+        console.log('comp: ', comResult, comSquare);
 				setTimeout(() => {
 					if (playerResult === 'hit') {
-            console.log(square);
+            updateDialogue('It was a hit!');
 						square.classList.add('hit');
 						square.classList.remove('clickable');
 					} else if (playerResult === 'miss') {
+            updateDialogue('You missed!');
 						square.classList.remove('clickable');
 						square.classList.add('miss');
 					}
-				}, 150);
-				// setTimeout(() => {
-				// 	if (result[1] === 'hit') {
-				// 		comSquare.classList.add('hit');
-				// 	} else if (result[1] === 'miss') {
-				// 		comSquare.classList.add('miss');
-				// 	}
-				// }, 1500);
+          setTimeout(() => {
+            updateDialogue('Computer attacking...');
+            setTimeout(() => {
+              if (comResult[0] === 'hit') {
+                updateDialogue('You were hit!');
+                comSquare.classList.add('hit');
+              } else if (comResult[0] === 'miss') {
+                updateDialogue('The computer missed!');
+                comSquare.classList.add('miss');
+              }
+              setTimeout(() => {
+                updateDialogue('Your turn, click to attack')
+              }, 1500);
+            },1500);
+          }, 1000);
+				}, 800);
+				
 			});
 		});
 	}
+
+  function updateDialogue(text) {
+    dialogue.textContent = ''
+    const element = document.createElement('h3');
+    element.textContent = text;
+    dialogue.appendChild(element);
+  }
+
+  function attackingText(coord) {
+    const element = document.createElement('h3');
+    element.textContent = `Attacking position [${coord[0]}, ${coord[1]}]`;
+    return element;
+  }
 
 	function isValidPlace(ship, startX, startY, isHorizontal) {
 		let validPlace = true;
