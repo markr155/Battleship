@@ -25,10 +25,15 @@ body {
 }
 
 .playing-board-container {
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
   display: none;
   flex-direction: column;
+  text-align: center;
+}
+
+h4 {
+  text-decoration: underline;
 }
 
 .game-setup-container {
@@ -36,18 +41,22 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .game-setup-ships-container {
   display: flex;
   justify-content: space-around;
   text-align: center;
+
 }
 
 .game-setup-buttons-container {
   display: flex;
   margin-top: 1.5rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  width: 100%;
+  align-self: center;
 }
 
 .setup-button {
@@ -55,6 +64,7 @@ body {
   padding: 0.2rem 0.4rem;
   border-radius: 5%;
   border: 0;
+
   /* margin: 0 0.5rem; */
 }
 
@@ -89,7 +99,9 @@ body {
   body {
     font-size: 1.2rem;
   }
-
+  h4 {
+    margin-top: 2rem;
+  }
   .board-container {
     flex-direction: row;
     width: 70%;
@@ -100,11 +112,16 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     padding-bottom: 1rem;
+    align-items: start;
   }
 
   .playing-board-container {
     width: 90%;
     flex-direction: row;
+  }
+
+  .player-board-container {
+    width: 50%;
   }
 
   .player1-board,
@@ -115,6 +132,7 @@ body {
 
   .game-setup-board {
     width: 65%;
+    max-width: 50%;
   }
   
   .game-setup-ships-container {
@@ -136,6 +154,7 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0.5rem;
+    width: auto;  
   }
   .setup-button {
     width: 80%;
@@ -147,8 +166,10 @@ body {
 .player2-board,
 .game-setup-board {
   display: grid;
+  margin: 1rem;
   grid-template-columns: repeat(10, 1fr);
   gap: 0;
+  width: 90%;
 }
 
 .game-square {

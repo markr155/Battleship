@@ -147,7 +147,9 @@ export default function renderDOM() {
         console.log(result);
         if (result === "hit") {
           square.classList.add("hit");
+          square.classList.remove('clickable');
         } else if (result === "miss") {
+          square.classList.remove('clickable');
           square.classList.add("miss");
         }
         gameController.playRound([x, y], playerBoard);
