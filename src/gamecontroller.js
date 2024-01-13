@@ -13,26 +13,26 @@ export default function gameController(board1, board2) {
       coord: [0, 0],
       horizontal: true,
     },
-    // {
-    //   ship: newShip(3),
-    //   coord: [0, 1],
-    //   horizontal: true,
-    // },
-    // {
-    //   ship: newShip(3),
-    //   coord: [0, 4],
-    //   horizontal: true,
-    // },
-    // {
-    //   ship: newShip(4),
-    //   coord: [5, 9],
-    //   horizontal: false,
-    // },
-    // {
-    //   ship: newShip(5),
-    //   coord: [9, 9],
-    //   horizontal: false,
-    // },
+    {
+      ship: newShip(3),
+      coord: [0, 1],
+      horizontal: true,
+    },
+    {
+      ship: newShip(3),
+      coord: [0, 4],
+      horizontal: true,
+    },
+    {
+      ship: newShip(4),
+      coord: [5, 9],
+      horizontal: false,
+    },
+    {
+      ship: newShip(5),
+      coord: [9, 9],
+      horizontal: false,
+    },
   ];
 
   function placeComShips() {

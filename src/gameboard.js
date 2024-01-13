@@ -1,5 +1,5 @@
 import ship from "./ship.js";
-export default function gameBoard() {
+export default function gameBoard(isComputer = false) {
   // Set board length/width
   const boardSize = 10;
   // Create board
@@ -23,7 +23,7 @@ export default function gameBoard() {
     const startX = parseInt(
       isHorizontal ? Math.min(x, boardSize - ship.length) : x,
     );
-    const startY = parseInt(isHorizontal ? y : Math.max(y, ship.length - 1));
+    const startY = parseInt(isHorizontal ? y : Math.min(y, boardSize - ship.length));
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
@@ -82,7 +82,14 @@ export default function gameBoard() {
     return shipsSunk.length == shipsPlaced.length ? true : false;
   };
 
-  function addSetupShipsToPlayerBoard(playerShipsPlaced) {}
+  function randCoord() {
+    const x = Math.floor(Math.random() * 10);
+    return x;
+  }
+
+  function addComputerShips(){
+    
+  }
 
   return {
     placeShip,
@@ -94,7 +101,6 @@ export default function gameBoard() {
       return attacksMissed;
     },
     hasAllSunk,
-    addSetupShipsToPlayerBoard,
   };
 }
 // checks if square has been hit before

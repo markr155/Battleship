@@ -19,7 +19,7 @@ const dialogue = document.querySelector(".dialogue");
 
 const render = renderDOM();
 const playerBoard = gameBoard();
-const comBoard = gameBoard();
+const comBoard = gameBoard(true);
 const game = gameController(playerBoard, comBoard);
 
 render.displayBoard(playerSetUpBoard, playerBoard);

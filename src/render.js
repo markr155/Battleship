@@ -3,14 +3,16 @@ const game = gameController();
 export default function renderDOM() {
   let boardSize;
   let playerShipsPlaced = [];
+
   function displayBoard(boardContainer, board, isClickable = false) {
     boardSize = 10;
+    console.log(boardContainer, board.getBoard)
     let displayBoardSize = board.getBoard.length - 1;
     boardContainer.textContent = "";
     board.getBoard.forEach((row, y) => {
       row.forEach((col, x) => {
         const square = createBoardSquare(x, displayBoardSize - y, isClickable);
-        if (!!board.getBoard[x][boardSize - 1 - y])
+        if ((!!board.getBoard[x][boardSize - 1 - y]))
           square.classList.add("ship");
         boardContainer.appendChild(square);
       });
@@ -25,7 +27,6 @@ export default function renderDOM() {
     }
     square.dataset.x = x;
     square.dataset.y = y;
-    // square.textContent = `[${x}, ${y}]`
     return square;
   }
 
