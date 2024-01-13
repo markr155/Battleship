@@ -82,15 +82,6 @@ export default function gameBoard(isComputer = false) {
     return shipsSunk.length == shipsPlaced.length ? true : false;
   };
 
-  function randCoord() {
-    const x = Math.floor(Math.random() * 10);
-    return x;
-  }
-
-  function addComputerShips(){
-    
-  }
-
   return {
     placeShip,
     receiveAttack,

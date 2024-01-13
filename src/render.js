@@ -1,12 +1,11 @@
 import gameController from "./gamecontroller.js";
 const game = gameController();
 export default function renderDOM() {
-  let boardSize;
+  let boardSize = 10;
   let playerShipsPlaced = [];
+  let comShipsPlaced = [];  
 
   function displayBoard(boardContainer, board, isClickable = false) {
-    boardSize = 10;
-    console.log(boardContainer, board.getBoard)
     let displayBoardSize = board.getBoard.length - 1;
     boardContainer.textContent = "";
     board.getBoard.forEach((row, y) => {
@@ -69,32 +68,13 @@ export default function renderDOM() {
       console.log("no ship selected");
       return;
     }
-    // sets starting x, y to ensure ship doesnt overflow
-    // if horizontal, y position changes, if vertical, x position changes
-    const startX = parseInt(
-      isHorizontal ? Math.min(x, boardSize - ship.length) : x,
-    );
-    const startY = parseInt(isHorizontal ? y : Math.max(y, ship.length - 1));
+ 
+    const [startX, startY] = startXY(x, y, isHorizontal, ship);
 
     // checks if ship has already been placed
-    for (let i = 0; i < ship.length; i++) {
-      let square = document;
-      if (isHorizontal) {
-        if (
-          document
-            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
-            .classList.contains("ship")
-        )
-          return "Ship already placed";
-      } else {
-        if (
-          document
-            .querySelector(`[data-x='${startX}'][data-y='${startY - i}']`)
-            .classList.contains("ship")
-        )
-          return "Ship already placed";
-      }
-    }
+    const validPlace = isValidPlace(ship, startX, startY, isHorizontal);
+    if (!validPlace) {
+      return `${shipName} placement failed`}
     // places ship on board
     for (let i = 0; i < ship.length; i++) {
       isHorizontal
@@ -114,6 +94,17 @@ export default function renderDOM() {
       coord: [x, y],
       horizontal: isHorizontal,
     });
+    return 'success';
+  }
+
+  // sets starting x, y to ensure ship doesnt overflow
+  // if horizontal, y position changes, if vertical, x position changes
+  function startXY(x, y, isHorizontal, ship) {
+    const newX = parseInt(
+      isHorizontal ? Math.min(x, boardSize - ship.length) : x,
+    );
+    const newY = parseInt(isHorizontal ? y : Math.max(y, ship.length - 1));
+    return [newX, newY];
   }
 
   function resetSetupBoard(setupShipElements) {
@@ -157,6 +148,28 @@ export default function renderDOM() {
       });
     });
   }
+  
+  function isValidPlace(ship, startX, startY, isHorizontal) {
+    let validPlace = true;
+    for (let i = 0; i < ship.length; i++) {
+      if (isHorizontal) {
+        if (
+          document
+            .querySelector(`[data-x='${startX + i}'][data-y='${startY}']`)
+            .classList.contains("ship")
+        )
+          validPlace = false;
+      } else {
+        if (
+          document
+            .querySelector(`[data-x='${startX}'][data-y='${startY - i}']`)
+            .classList.contains("ship")
+        )
+          validPlace = false;
+      }
+     }
+     return validPlace;
+    }
 
   function dummyShipDrop(shipName, x, y, isHorizontal) {
     const ship = shipLengths(shipName);
@@ -174,20 +187,28 @@ export default function renderDOM() {
         dataset: { x, y },
       },
     };
-    setUpBoardDrop(dummyEvent);
+    const result = setUpBoardDrop(dummyEvent);
+    return result;
   }
-  function randomiseSetup(setupShips) {
-    dummyShipDrop("carrier", 0, 1, true);
-    dummyShipDrop("battleship", 6, 1, false);
-    dummyShipDrop("destroyer", 2, 9, true);
-    dummyShipDrop("submarine", 2, 5, true);
-    dummyShipDrop("patrol-boat", 9, 7, false);
-    setupShips.forEach((ship) => ship.classList.add("placed"));
+  function randomiseSetup(setupShipElements) {
+    let someFailed = false;
+    setupShipElements.forEach((ship, index) => {
+      if (ship.classList.contains('placed')) return;
+      const shipName = ship.id;
+      const [x, y] = getNewCoords();
+      const randHorizontal = Math.random() < 0.5
+      const result = dummyShipDrop(shipName, x, y, randHorizontal);
+      if (!(result === 'success')) {
+        someFailed = true;
+        return;
+      }
+      ship.classList.add("placed")
+    });
+    if (someFailed) randomiseSetup(setupShipElements);
   }
 
-  function randCoord() {
-    const x = Math.floor(Math.random() * 10);
-    return x;
+  function getNewCoords() {
+    return [Math.floor(Math.random() * boardSize), Math.floor(Math.random() * boardSize)];
   }
 
   return {
