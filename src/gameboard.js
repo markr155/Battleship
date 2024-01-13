@@ -23,7 +23,9 @@ export default function gameBoard(isComputer = false) {
     const startX = parseInt(
       isHorizontal ? Math.min(x, boardSize - ship.length) : x,
     );
-    const startY = parseInt(isHorizontal ? y : Math.min(y, boardSize - ship.length));
+    const startY = parseInt(
+      isHorizontal ? y : Math.min(y, boardSize - ship.length),
+    );
     // checks if ship has already been placed
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
@@ -65,7 +67,6 @@ export default function gameBoard(isComputer = false) {
     });
 
     if (hasBeenAttacked) return "Square already attacked";
-
     const tarSquare = board[x][y];
     if (!!tarSquare) {
       tarSquare.hit();

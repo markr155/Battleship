@@ -48,7 +48,6 @@ h4 {
   display: flex;
   justify-content: space-around;
   text-align: center;
-
 }
 
 .game-setup-buttons-container {
@@ -134,7 +133,7 @@ h4 {
     width: 65%;
     max-width: 50%;
   }
-  
+
   .game-setup-ships-container {
     display: flex;
     flex-direction: column;
@@ -154,7 +153,7 @@ h4 {
     align-items: center;
     justify-content: center;
     margin: 0.5rem;
-    width: auto;  
+    width: auto;
   }
   .setup-button {
     width: 80%;

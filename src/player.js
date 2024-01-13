@@ -20,14 +20,17 @@ export default function newPlayer(initialName) {
   }
 
   return {
+    name,
+    comAttacks,
     issueAttack(board, coord) {
+      let result;
       if (name === "Computer") {
-        coord = computerAttackCoord();
-      }
-      return board.receiveAttack(coord);
+        const comCoord = computerAttackCoord();
+        result = [board.receiveAttack(comCoord), comCoord];
+      } else result = board.receiveAttack(coord);
+      return result;
     },
     computerAttackCoord,
   };
 }
 
-// module.exports = newPlayer;

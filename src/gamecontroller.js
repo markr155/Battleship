@@ -28,10 +28,13 @@ export default function gameController(board1, board2) {
   function placeComShips(ships = shipList) {
     const failedShips = [];
     ships.forEach((ship) => {
-      const coord = [Math.floor(Math.random() * board2.boardSize), Math.floor(Math.random() * board.boardSize)]
+      const coord = [
+        Math.floor(Math.random() * board2.boardSize),
+        Math.floor(Math.random() * board.boardSize),
+      ];
       const horizontal = Math.random() > 0.5;
       const result = board2.placeShip(ship.ship, coord, horizontal);
-      if (result) failedShips.push({ship: newShip(result)});
+      if (result) failedShips.push({ ship: newShip(result) });
     });
     if (failedShips[0]) placeComShips(failedShips);
   }
@@ -47,10 +50,11 @@ export default function gameController(board1, board2) {
     enemyBoard === board2 ? (enemyBoard = board1) : (enemyBoard = board2);
   }
 
+
   const playRound = (coord, enemyBoard) => {
-    const result = currentPlayer.issueAttack(enemyBoard, coord);
+    const result = (currentPlayer.issueAttack(enemyBoard, coord));
     if (enemyBoard.hasAllSunk()) gameFinish = true;
-    if (!!gameFinish) console.log("game finish");
+    if (!!gameFinish) return `${currentPlayer} wins!`;
     switchCurrentPlayer();
     return result;
   };
@@ -60,9 +64,3 @@ export default function gameController(board1, board2) {
     placeComShips,
   };
 }
-// Each player places ships in config
-// human player goes first
-// picks coord to attack
-// comp board receives attack
-// check if all ships are sunk - end game
-// switch current player
