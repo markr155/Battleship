@@ -4,7 +4,7 @@ import newShip from "../src/ship.js";
 
 export default function gameController(board1, board2) {
   const board = gameBoard();
-  const player1 = newPlayer("Human");
+  const player1 = newPlayer("Player");
   const player2 = newPlayer("Computer");
 
   const shipList = [
@@ -50,12 +50,11 @@ export default function gameController(board1, board2) {
     enemyBoard === board2 ? (enemyBoard = board1) : (enemyBoard = board2);
   }
 
-
   const playRound = (coord, enemyBoard) => {
-    const result = (currentPlayer.issueAttack(enemyBoard, coord));
-    if (result === 'Square already attacked') return;
+    const result = currentPlayer.issueAttack(enemyBoard, coord);
+    if (result === "Square already attacked") return;
     if (enemyBoard.hasAllSunk()) gameFinish = true;
-    if (!!gameFinish) return `${currentPlayer} wins!`;
+    if (!!gameFinish) return `${currentPlayer.name} wins!`;
     switchCurrentPlayer();
     return result;
   };

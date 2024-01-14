@@ -58,13 +58,16 @@ h4 {
   align-self: center;
 }
 
-.setup-button {
+.setup-button,
+.restart-button {
   color: var(--background-color);
   padding: 0.2rem 0.4rem;
   border-radius: 5%;
   border: 0;
+}
 
-  /* margin: 0 0.5rem; */
+.restart-button {
+  margin: 1.5rem;
 }
 
 .game-setup-ship {
@@ -207,4 +210,15 @@ header {
 
 .miss {
   background: var(--miss);
+}
+
+#end-game-modal {
+  background: var(--background-color);
+  color: var(--main-text);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  text-align: center;
 }

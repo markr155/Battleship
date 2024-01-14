@@ -46,7 +46,13 @@ startButton.addEventListener("click", () => {
     render.displayBoard(playerBoardDisplay, playerBoard);
     render.displayBoard(player2BoardDisplay, comBoard, true);
     dialogue.textContent = "Click on the enemy board to issue an attack";
-    render.attackEnemyOnClick(playerBoardDisplay, player2BoardDisplay, game, comBoard, playerBoard);
+    render.attackEnemyOnClick(
+      playerBoardDisplay,
+      player2BoardDisplay,
+      game,
+      comBoard,
+      playerBoard,
+    );
   } else {
     dialogue.querySelector("h4").classList.remove("hidden");
   }
