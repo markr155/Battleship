@@ -15,7 +15,7 @@ export default function renderDOM() {
 			row.forEach((col, x) => {
 				const square = createBoardSquare(x, displayBoardSize - y, isClickable);
 				if (!!board.getBoard[x][boardSize - 1 - y])
-					square.classList.add('ship');
+					if(!isClickable) square.classList.add('ship');
 				boardContainer.appendChild(square);
 			});
 		});
@@ -178,10 +178,10 @@ export default function renderDOM() {
 							setTimeout(() => {
 								updateDialogue('Your turn, click to attack');
 								roundReady = true;
-							}, 0); //1000
-						}, 0); //800
-					}, 0); //800
-				}, 0); //800
+							}, 700); 
+						}, 800); 
+					}, 800); 
+				}, 800); 
 			});
 		});
 	}
